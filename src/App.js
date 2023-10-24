@@ -7,12 +7,7 @@ class App extends Component {
     photos: [],
   };
 
-  // componentDidMount() É invocado imediatamente após um componente ser montado (inserido na árvore). Inicializações que exijam nós do DOM devem vir aqui. Se precisar carregar data de um endpoint remoto, este é um bom lugar para instanciar sua requisição.
-  componentDidMount() {
-    this.loadPosts();
-  }
-
-  // Pegando os posts
+  // Pegando os posts e fotos
   loadPosts = async () => {
     const postsResponse = fetch("https://jsonplaceholder.org/posts");
     const photosResponse = fetch("https://jsonplaceholder.typicode.com/photos");
@@ -29,6 +24,11 @@ class App extends Component {
 
     this.setState({ posts: postsAndPhotos });
   };
+
+  // componentDidMount() É invocado imediatamente após um componente ser montado (inserido na árvore/exibido na página). Inicializações que exijam nós do DOM devem vir aqui. Se precisar carregar data de um endpoint remoto, este é um bom lugar para instanciar sua requisição.
+  componentDidMount() {
+    this.loadPosts();
+  }
 
   // componentDidUpdate() é invocado imediatamente após alguma atualização ocorrer. Este método não é chamado pelo initial render
   componentDidUpdate() {}
