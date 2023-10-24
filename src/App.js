@@ -24,17 +24,17 @@ class App extends Component {
   };
   timeoutUpdate = null;
 
-  // Quando eu montar o componente inteiro na página eu disparo essa função
+  // componentDidMount() É invocado imediatamente após um componente ser montado (inserido na árvore). Inicializações que exijam nós do DOM devem vir aqui. Se precisar carregar data de um endpoint remoto, este é um bom lugar para instanciar sua requisição.
   componentDidMount() {
     this.handleTimeout();
   }
 
-  // Quando o componente for atualizado eu disparo essa
+  // componentDidUpdate() é invocado imediatamente após alguma atualização ocorrer. Este método não é chamado pelo initial render
   componentDidUpdate() {
     this.handleTimeout();
   }
 
-  // Limpando o lixo da página quando o componente for ser desmontado
+  // componentWillUnmount() é invocado imediatamente antes que um componente seja desmontado e destruído. Qualquer limpeza necessária deve ser realizada neste método, como invalidar timers, cancelar requisições de rede, ou limpar qualquer subscrição que foi criada no componentDidMount().
   componentWillUnmount() {
     clearTimeout(this.timeoutUpdate);
   }
