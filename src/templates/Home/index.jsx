@@ -55,6 +55,7 @@ export class Home extends Component {
 
   render() {
     const { posts, page, postsPerPage, allPosts, searchValue } = this.state;
+
     // Checando se tem mais posts
     const noMorePosts = page + postsPerPage >= allPosts.length;
 
@@ -68,7 +69,7 @@ export class Home extends Component {
     return (
       <section className="container">
         <div className="search-container">
-          {/* Checando se existe um valor em searchValue */}
+          {/* Checando se existe um valor em searchValue e exibindo ele */}
           {searchValue && <h1>Search value: {searchValue}</h1>}
           <TextInput
             handleChange={this.handleChange}
