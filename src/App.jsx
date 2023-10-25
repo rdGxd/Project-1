@@ -1,34 +1,24 @@
 import { Component } from "react";
+
 import "./App.css";
-import { PostCard } from "./components/PostCard";
+
+import { Posts } from "./components/Posts";
+import { loadPosts } from "./utils/load-posts";
 
 class App extends Component {
   state = {
     posts: [],
-    photos: [],
   };
 
   // Pegando os posts e fotos
   loadPosts = async () => {
-    const postsResponse = fetch("https://jsonplaceholder.org/posts");
-    const photosResponse = fetch("https://jsonplaceholder.typicode.com/photos");
-
-    const [posts, photos] = await Promise.all([postsResponse, photosResponse]);
-
-    const postsJson = await posts.json();
-    const photosJson = await photos.json();
-
-    // Pegando uma foto por post
-    const postsAndPhotos = postsJson.map((post, index) => {
-      return { ...post, cover: photosJson[index].url };
-    });
-
+    const postsAndPhotos = await loadPosts();
     this.setState({ posts: postsAndPhotos });
   };
 
   // componentDidMount() É invocado imediatamente após um componente ser montado (inserido na árvore/exibido na página). Inicializações que exijam nós do DOM devem vir aqui. Se precisar carregar data de um endpoint remoto, este é um bom lugar para instanciar sua requisição.
-  componentDidMount() {
-    this.loadPosts();
+  async componentDidMount() {
+    await this.loadPosts();
   }
 
   // componentDidUpdate() é invocado imediatamente após alguma atualização ocorrer. Este método não é chamado pelo initial render
@@ -42,16 +32,7 @@ class App extends Component {
 
     return (
       <section className="container">
-        <div className="posts">
-          {posts.map((post) => (
-            <PostCard
-              key={post.id}
-              title={post.title}
-              cover={post.cover}
-              body={post.content}
-            />
-          ))}
-        </div>
+        <Posts posts={posts} />
       </section>
     );
   }
