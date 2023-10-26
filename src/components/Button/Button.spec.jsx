@@ -37,4 +37,13 @@ describe("<Button />", () => {
 
     expect(button).toBeEnabled();
   });
+
+  it("should match snapshot", () => {
+    const fn = jest.fn();
+    const { container } = render(
+      <Button text="Load More" disabled={false} onClick={fn} />
+    );
+    // eslint-disable-next-line testing-library/no-node-access
+    expect(container.firstChild).toMatchSnapshot();
+  });
 });
