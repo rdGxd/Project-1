@@ -34,24 +34,18 @@ describe("<Posts />", () => {
 
     expect(screen.getAllByText(/content/i)).toHaveLength(3);
 
-    expect(screen.getByRole("img", { name: /title 3/i })).toHaveAttribute(
-      "src",
-      "img/img3.png"
-    );
+    expect(screen.getByRole("img", { name: /title 3/i })).toHaveAttribute("src", "img/img3.png");
   });
 
   it("should not render posts", () => {
     render(<Posts />);
 
-    expect(
-      screen.queryByRole("heading", { name: /title/i })
-    ).not.toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: /title/i })).not.toBeInTheDocument();
   });
 
   it("should match snapshot", () => {
     const { container } = render(<Posts {...props} />);
 
-    // eslint-disable-next-line testing-library/no-node-access
     expect(container.firstChild).toMatchSnapshot();
   });
 });

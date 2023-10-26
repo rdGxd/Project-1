@@ -4,9 +4,8 @@ import { Button } from ".";
 
 describe("<Button />", () => {
   it("should render the button with the text 'Load More'", () => {
-    render(<Button text="Load More" />);
-    // expect.assertions(1); // Comum em testes assíncronos
-    // expect(button).toHaveAttribute("class", "button");
+    const fn = jest.fn();
+    render(<Button text="Load More" disabled={false} onClick={fn} />);
 
     const button = screen.getByRole("button", { name: /load more/i });
     expect(button).toBeInTheDocument();
@@ -23,7 +22,8 @@ describe("<Button />", () => {
   });
 
   it("should be disabled when disabled is true", () => {
-    render(<Button text="Load More" disabled={true} />);
+    const fn = jest.fn();
+    render(<Button text="Load More" disabled={true} onClick={fn} />);
 
     const button = screen.getByRole("button", { name: /load more/i });
 
@@ -31,7 +31,8 @@ describe("<Button />", () => {
   });
 
   it("should be enabled when enabled is false", () => {
-    render(<Button text="Load More" disabled={false} />);
+    const fn = jest.fn();
+    render(<Button text="Load More" disabled={false} onClick={fn} />);
 
     const button = screen.getByRole("button", { name: /load more/i });
 
@@ -40,10 +41,7 @@ describe("<Button />", () => {
 
   it("should match snapshot", () => {
     const fn = jest.fn();
-    const { container } = render(
-      <Button text="Load More" disabled={false} onClick={fn} />
-    );
-    // eslint-disable-next-line testing-library/no-node-access
+    const { container } = render(<Button text="Load More" disabled={false} onClick={fn} />);
     expect(container.firstChild).toMatchSnapshot();
   });
 });

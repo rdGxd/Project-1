@@ -62,21 +62,11 @@ export const Home = () => {
       </div>
 
       {/* Checando se existem posts depois de filtrar */}
-      {filteredPosts.length > 0 ? (
-        <Posts posts={filteredPosts} />
-      ) : (
-        <p>Não existem posts</p>
-      )}
+      {filteredPosts.length > 0 ? <Posts posts={filteredPosts} /> : <p>Não existem posts</p>}
 
       <div className="button-container">
         {/* Se o searchValue for true o botão não será exibido */}
-        {!searchValue && (
-          <Button
-            text="Load more posts"
-            onClick={loadMorePosts}
-            disabled={noMorePosts}
-          />
-        )}
+        {!searchValue && <Button text="Load more posts" onClick={loadMorePosts} disabled={noMorePosts} />}
       </div>
     </section>
   );
