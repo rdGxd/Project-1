@@ -11,7 +11,7 @@ export const Home = () => {
   const [posts, setPosts] = useState([]);
   const [allPosts, setAllPosts] = useState([]);
   const [page, setPage] = useState(0);
-  const [postsPerPage] = useState(10);
+  const [postsPerPage] = useState(3);
   const [searchValue, setSearchValue] = useState("");
 
   // Carregando os Posts
@@ -39,6 +39,7 @@ export const Home = () => {
 
   // Se as dependências mudarem entre as renderizações, o useEffect executará a função de retorno de chamada
   useEffect(() => {
+    // Função a ser executada
     handleLoadPosts(0, postsPerPage);
   }, [postsPerPage, handleLoadPosts]);
 
