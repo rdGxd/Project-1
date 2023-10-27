@@ -6,7 +6,7 @@ export const Posts = ({ posts = [] }) => {
   return (
     <div className="posts">
       {posts.map((post) => (
-        <PostCard key={post.id} title={post.title} cover={post.cover} content={post.content} />
+        <PostCard key={post.id} title={post.title} cover={post.cover} body={post.body} />
       ))}
     </div>
   );
@@ -17,7 +17,7 @@ Posts.propTypes = {
     P.shape({
       cover: P.string.isRequired,
       title: P.string.isRequired,
-      content: P.string.isRequired,
+      body: P.string.isRequired,
     }),
   ),
 };

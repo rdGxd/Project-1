@@ -12,13 +12,13 @@ exports[`<Posts /> should match snapshot 1`] = `
       src="img/img1.png"
     />
     <div
-      class="post-content"
+      class="post-body"
     >
       <h2>
         title 1
       </h2>
       <p>
-        content 1
+        body 1
       </p>
     </div>
   </div>
@@ -30,13 +30,13 @@ exports[`<Posts /> should match snapshot 1`] = `
       src="img/img2.png"
     />
     <div
-      class="post-content"
+      class="post-body"
     >
       <h2>
         title 2
       </h2>
       <p>
-        content 2
+        body 2
       </p>
     </div>
   </div>
@@ -48,13 +48,13 @@ exports[`<Posts /> should match snapshot 1`] = `
       src="img/img3.png"
     />
     <div
-      class="post-content"
+      class="post-body"
     >
       <h2>
         title 3
       </h2>
       <p>
-        content 3
+        body 3
       </p>
     </div>
   </div>

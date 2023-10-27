@@ -1,6 +1,6 @@
 // Pegando os posts e fotos
 export const loadPosts = async () => {
-  const postsResponse = fetch("https://jsonplaceholder.org/posts");
+  const postsResponse = fetch("https://jsonplaceholder.typicode.com/posts");
   const photosResponse = fetch("https://jsonplaceholder.typicode.com/photos");
 
   const [posts, photos] = await Promise.all([postsResponse, photosResponse]);
@@ -8,7 +8,7 @@ export const loadPosts = async () => {
   const postsJson = await posts.json();
   const photosJson = await photos.json();
 
-  // Pegando uma foto por post
+  // Pegando uma foto para cada post
   const postsAndPhotos = postsJson.map((post, index) => {
     return { ...post, cover: photosJson[index].url };
   });
