@@ -35,5 +35,5 @@ module.exports = {
     },
   },
   plugins: ["react"],
-  rules: { "react/react-in-jsx-scope": "off" },
+  rules: { "react/react-in-jsx-scope": "off", "no-unused-vars": "off" },
 };
