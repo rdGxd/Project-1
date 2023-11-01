@@ -1,24 +1,27 @@
 // Compound Components
-import { Children, cloneElement, useState } from "react";
+import { createContext, useContext, useState } from "react";
+
+const TurnOnOffContext = createContext();
 
 const TurnOnOff = ({ children }) => {
   const [isOn, setIsOn] = useState(false);
   const onTurn = () => setIsOn((s) => !s);
 
-  return Children.map(children, (child) => {
-    const newChild = cloneElement(child, {
-      isOn,
-      onTurn,
-    });
-    return newChild;
-  });
+  return <TurnOnOffContext.Provider value={{ isOn, onTurn }}>{children}</TurnOnOffContext.Provider>;
 };
 
-const TurnedOn = ({ isOn, children }) => (isOn ? children : null);
+const TurnedOn = ({ children }) => {
+  const { isOn } = useContext(TurnOnOffContext);
+  return isOn ? children : null;
+};
 
-const TurnedOFF = ({ isOn, children }) => (isOn ? null : children);
+const TurnedOFF = ({ children }) => {
+  const { isOn } = useContext(TurnOnOffContext);
+  return isOn ? null : children;
+};
 
-const TurnButton = ({ isOn, onTurn }) => {
+const TurnButton = () => {
+  const { isOn, onTurn } = useContext(TurnOnOffContext);
   return <button onClick={onTurn}>Turn {isOn ? "OFF" : "ON"}</button>;
 };
 
