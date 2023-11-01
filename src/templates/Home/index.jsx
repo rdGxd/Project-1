@@ -1,53 +1,39 @@
-import { Component, useEffect, useState } from "react";
+// Compound Components
+import { Children, cloneElement, useState } from "react";
 
-class MyErrorBoundary extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { hasError: false };
-  }
+const TurnOnOff = ({ children }) => {
+  const [isOn, setIsOn] = useState(false);
+  const onTurn = () => setIsOn((s) => !s);
 
-  static getDerivedStateFromError(error) {
-    // Atualiza o state para que a próxima renderização mostre a UI alternativa.
-    return { hasError: true };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    // Você também pode registrar o erro em um serviço de relatórios de erro
-    // logErrorToMyService(error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      // Você pode renderizar qualquer UI alternativa
-      return <h1>Deu ruim =(</h1>;
-    }
-
-    return this.props.children;
-  }
-}
-
-const ItWillThrowError = () => {
-  const [counter, setCounter] = useState(0);
-
-  useEffect(() => {
-    if (counter > 3) {
-      throw new Error("Que chato!!!");
-    }
-  }, [counter]);
-
-  return (
-    <div>
-      <button onClick={() => setCounter((s) => s + 1)}>Click to increase {counter}</button>
-    </div>
-  );
+  return Children.map(children, (child) => {
+    const newChild = cloneElement(child, {
+      isOn,
+      onTurn,
+    });
+    return newChild;
+  });
 };
+
+const TurnedOn = ({ isOn, children }) => (isOn ? children : null);
+
+const TurnedOFF = ({ isOn, children }) => (isOn ? null : children);
+
+const TurnButton = ({ isOn, onTurn }) => {
+  return <button onClick={onTurn}>Turn {isOn ? "OFF" : "ON"}</button>;
+};
+
+const P = ({ children }) => <p>{children}</p>;
 
 export const Home = () => {
   return (
-    <div>
-      <MyErrorBoundary>
-        <ItWillThrowError />
-      </MyErrorBoundary>
-    </div>
+    <TurnOnOff>
+      <TurnedOn>
+        <P>ONLINE</P>
+      </TurnedOn>
+      <TurnedOFF>
+        <P>OFFLINE</P>
+      </TurnedOFF>
+      <TurnButton />
+    </TurnOnOff>
   );
 };
