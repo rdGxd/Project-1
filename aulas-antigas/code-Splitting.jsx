@@ -3,7 +3,7 @@ import { Suspense, lazy, useState } from "react";
 
 const loadComponent = () => {
   console.log("Carregando...");
-  return import("../../../aulas-antigas/lazy-component");
+  return import("./lazy-component");
 };
 
 const LazyComponent = lazy(loadComponent);
